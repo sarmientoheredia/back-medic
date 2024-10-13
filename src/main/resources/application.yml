@@ -1,0 +1,38 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  banner:
+    location: back-medic.txt
+  jpa:
+    database: oracle
+    hibernate:
+      ddl-auto: update
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl
+    open-in-view: false
+
+    show-sql: true
+    database-platform: org.hibernate.dialect.OracleDialect
+    properties:
+      hibernate:
+        format_sql: true
+
+
+  datasource:
+    username: MEDIC
+    password: DMEDIC
+    url: jdbc:oracle:thin:@localhost:1521/FREEPDB1
+    driver-class-name: oracle.jdbc.OracleDriver
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://0.0.0.0:8085/realms/realm_ejercito
+
+jwt:
+  auth:
+    converter:
+      resource-id: medic-client-id
+      principle-attribute: preferred_username
