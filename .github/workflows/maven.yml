@@ -32,6 +32,15 @@ jobs:
 #    - name: Unit Tests
 #      run: mvn -DskipTests --file pom.xml
 
+    - name: Intall Audit4j db
+      run: |
+        mvn install:install-file \
+          -Dfile=audit4j/audit4j-db-2.4.2.jar \
+          -DgroupId=org.audit4j \
+          -DartifactId=audit4j-db \
+          -Dversion=2.4.2 \
+          -Dpackaging=jar
+
     - name: Build with Maven
       run: |
         mvn clean -DskipTests
