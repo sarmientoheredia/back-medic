@@ -29,10 +29,15 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://0.0.0.0:8085/realms/realm_ejercito
+          issuer-uri: http://localhost:8085/realms/realm_ejercito
 
 jwt:
   auth:
     converter:
       resource-id: medic-client-id
       principle-attribute: preferred_username
+
+springdoc:
+  swagger-ui:
+    oauth:
+      client-id: medic-client-id

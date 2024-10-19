@@ -20,6 +20,7 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 public class SecurityConfig {
 
     private final JwtAuthConverter jwtAuthConverter;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -36,6 +37,7 @@ public class SecurityConfig {
 
                 // Autorizar todas las solicitudes
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated() // Todas las solicitudes requieren autenticación
                 )
                 // Configurar el servidor de recursos OAuth2 para usar JWT
@@ -49,7 +51,6 @@ public class SecurityConfig {
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(STATELESS) // No se crean sesiones en el servidor
                 );
-
 
 
         return http.build();
